@@ -9,3 +9,4 @@ glob:*.db
 glob:*.userprefs
 glob:.svn
 glob:.git
+glob:*.pidb
