@@ -24,7 +24,10 @@ namespace Lidgren.Network.Xna
 		/// </summary>
 		public static Point ReadPoint(this NetIncomingMessage message)
 		{
-			return new Point(message.ReadInt32(), message.ReadInt32());
+			Point retval;
+			retval.X = message.ReadInt32();
+			retval.Y = message.ReadInt32();
+			return retval;
 		}
 
 		/// <summary>
