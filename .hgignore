@@ -10,3 +10,5 @@ glob:*.userprefs
 glob:.svn
 glob:.git
 glob:*.pidb
+syntax: glob
+Lidgren.Network/Documentation/*
