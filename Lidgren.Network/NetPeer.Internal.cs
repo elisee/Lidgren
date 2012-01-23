@@ -225,11 +225,7 @@ namespace Lidgren.Network
 						{
 							m_socket.Shutdown(SocketShutdown.Receive);
 						}
-						catch (SocketException sx)
-						{
-							LogWarning(sx.ToString());
-						}
-            
+						catch { }
 						m_socket.Close(2); // 2 seconds timeout
 					}
 					if (m_messageReceivedEvent != null)
