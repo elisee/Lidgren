@@ -93,7 +93,7 @@ namespace Lidgren.Network
 		{
 			m_peer.VerifyNetworkThread();
 
-			// m_peer.LogDebug("Executing disconnect");
+			//m_peer.LogDebug("Executing disconnect");
 
 			// clear send queues
 			for (int i = 0; i < m_sendChannels.Length; i++)
@@ -184,12 +184,12 @@ namespace Lidgren.Network
 		{
 			if (m_localHailMessage != null)
 			{
-				byte[] hi = m_localHailMessage.PeekDataBuffer();
+				byte[] hi = m_localHailMessage.Data;
 				if (hi != null && hi.Length >= m_localHailMessage.LengthBytes)
 				{
 					if (om.LengthBytes + m_localHailMessage.LengthBytes > m_peerConfiguration.m_maximumTransmissionUnit - 10)
 						throw new NetException("Hail message too large; can maximally be " + (m_peerConfiguration.m_maximumTransmissionUnit - 10 - om.LengthBytes));
-					om.Write(m_localHailMessage.PeekDataBuffer(), 0, m_localHailMessage.LengthBytes);
+					om.Write(m_localHailMessage.Data, 0, m_localHailMessage.LengthBytes);
 				}
 			}
 		}
