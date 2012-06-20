@@ -151,6 +151,8 @@ namespace Lidgren.Network
 				return;
 			}
 
+			Console.WriteLine( "PERFORMANCE WARNING: Writing unaligned bytes in a NetBuffer" );
+			
 			int lastPartLen = 8 - firstPartLen;
 
 			for (int i = 0; i < numberOfBytes; i++)
