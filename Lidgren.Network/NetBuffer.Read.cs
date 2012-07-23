@@ -7,6 +7,9 @@ using System.Net;
 
 namespace Lidgren.Network
 {
+	/// <summary>
+	/// Base class for NetIncomingMessage and NetOutgoingMessage
+	/// </summary>
 	public partial class NetBuffer
 	{
 		private const string c_readOverflowError = "Trying to read past the buffer size - likely caused by mismatching Write/Reads, different size or order.";
@@ -618,7 +621,7 @@ namespace Lidgren.Network
 		/// <summary>
 		/// Reads a stored IPv4 endpoint description
 		/// </summary>
-		public IPEndPoint ReadIPEndpoint()
+		public IPEndPoint ReadIPEndPoint()
 		{
 			byte len = ReadByte();
 			byte[] addressBytes = ReadBytes(len);
