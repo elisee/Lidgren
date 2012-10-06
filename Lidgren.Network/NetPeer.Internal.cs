@@ -56,6 +56,18 @@ namespace Lidgren.Network
 			m_receiveCallbacks.Add(new NetTuple<SynchronizationContext, SendOrPostCallback>(SynchronizationContext.Current, callback));
 		}
 
+		/// <summary>
+		/// Call this to unregister a callback, but remember to do it in the same synchronization context!
+		/// </summary>
+		public void UnregisterReceivedCallback(SendOrPostCallback callback)
+		{
+			if (m_receiveCallbacks == null)
+				return;
+			m_receiveCallbacks.Remove(new NetTuple<SynchronizationContext, SendOrPostCallback>(SynchronizationContext.Current, callback));
+			if (m_receiveCallbacks.Count < 1)
+				m_receiveCallbacks = null;
+		}
+
 		internal void ReleaseMessage(NetIncomingMessage msg)
 		{
 			NetException.Assert(msg.m_incomingMessageType != NetIncomingMessageType.Error);
@@ -270,7 +282,7 @@ namespace Lidgren.Network
 			int maxCHBpS = 1250 - m_connections.Count;
 			if (maxCHBpS < 250)
 				maxCHBpS = 250;
-			if (delta > (1.0 / (double)maxCHBpS)) // max connection heartbeats/second max
+			if (delta > (1.0 / (double)maxCHBpS) || delta < 0.0) // max connection heartbeats/second max
 			{
 				m_frameCounter++;
 				m_lastHeartbeat = dnow;

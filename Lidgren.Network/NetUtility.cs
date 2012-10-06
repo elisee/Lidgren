@@ -26,6 +26,7 @@ using System.Net.NetworkInformation;
 using System.Net.Sockets;
 using System.Text;
 using System.Text.RegularExpressions;
+using System.Collections.Generic;
 
 namespace Lidgren.Network
 {
@@ -34,7 +35,14 @@ namespace Lidgren.Network
 	/// </summary>
 	public static class NetUtility
 	{
+		/// <summary>
+		/// Resolve endpoint callback
+		/// </summary>
 		public delegate void ResolveEndPointCallback(IPEndPoint endPoint);
+
+		/// <summary>
+		/// Resolve address callback
+		/// </summary>
 		public delegate void ResolveAddressCallback(IPAddress adr);
 
 		/// <summary>
@@ -259,6 +267,9 @@ namespace Lidgren.Network
 			return new string(c);
 		}
 		
+		/// <summary>
+		/// Gets the local broadcast address
+		/// </summary>
 		public static IPAddress GetBroadcastAddress()
 		{
 #if __ANDROID__
@@ -474,10 +485,13 @@ namespace Lidgren.Network
 
 		internal static int RelativeSequenceNumber(int nr, int expected)
 		{
-			int retval = ((nr + NetConstants.NumSequenceNumbers) - expected) % NetConstants.NumSequenceNumbers;
-			if (retval > (NetConstants.NumSequenceNumbers / 2))
-				retval -= NetConstants.NumSequenceNumbers;
-			return retval;
+			return (nr - expected + NetConstants.NumSequenceNumbers + (NetConstants.NumSequenceNumbers / 2)) % NetConstants.NumSequenceNumbers - (NetConstants.NumSequenceNumbers / 2);
+
+			// old impl:
+			//int retval = ((nr + NetConstants.NumSequenceNumbers) - expected) % NetConstants.NumSequenceNumbers;
+			//if (retval > (NetConstants.NumSequenceNumbers / 2))
+			//	retval -= NetConstants.NumSequenceNumbers;
+			//return retval;
 		}
 
 		/// <summary>
@@ -554,6 +568,22 @@ namespace Lidgren.Network
 			else if (mtp >= NetMessageType.UserSequenced1)
 				return NetDeliveryMethod.UnreliableSequenced;
 			return NetDeliveryMethod.Unreliable;
+		}
+
+		/// <summary>
+		/// Creates a comma delimited string from a lite of items
+		/// </summary>
+		public static string MakeCommaDelimitedList<T>(IList<T> list)
+		{
+			var cnt = list.Count;
+			StringBuilder bdr = new StringBuilder(cnt * 5); // educated guess
+			for(int i=0;i<cnt;i++)
+			{
+				bdr.Append(list[i].ToString());
+				if (i != cnt - 1)
+					bdr.Append(", ");
+			}
+			return bdr.ToString();
 		}
 	}
 }

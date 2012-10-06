@@ -105,7 +105,7 @@ namespace Lidgren.Network
 			NetException.Assert(((numberOfBits >= 1) && (numberOfBits <= 8)), "Must write between 1 and 8 bits!");
 
 			// mask out unwanted bits in the source
-			byte isrc = (byte)((uint)source & ((~(uint)0) >> (8 - numberOfBits)));
+			byte isrc = (byte)(source & (0x000000FF >> (8 - numberOfBits)));
 
 			int bytePtr = destBitOffset >> 3;
 
@@ -173,6 +173,9 @@ namespace Lidgren.Network
 			return;
 		}
 
+		/// <summary>
+		/// Reads an unsigned 16 bit integer
+		/// </summary>
 		[CLSCompliant(false)]
 #if UNSAFE
 		public static unsafe ushort ReadUInt16(byte[] fromBuffer, int numberOfBits, int readBitOffset)
@@ -285,6 +288,9 @@ namespace Lidgren.Network
 		//[CLSCompliant(false)]
 		//public static ulong ReadUInt64(byte[] fromBuffer, int numberOfBits, int readBitOffset)
 
+		/// <summary>
+		/// Writes un unsigned 16 bit integer
+		/// </summary>
 		[CLSCompliant(false)]
 		public static int WriteUInt16(ushort source, int numberOfBits, byte[] destination, int destinationBitOffset)
 		{
