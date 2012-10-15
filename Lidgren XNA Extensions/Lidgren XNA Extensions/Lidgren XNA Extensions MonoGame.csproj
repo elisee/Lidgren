@@ -70,6 +70,26 @@
     <PlatformTarget>x86</PlatformTarget>
     <ConsolePause>false</ConsolePause>
   </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug MonoGameMini|x86' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug</OutputPath>
+    <DefineConstants>DEBUG;</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <PlatformTarget>x86</PlatformTarget>
+    <ConsolePause>false</ConsolePause>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release MonoGameMini|x86' ">
+    <DebugType>none</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release</OutputPath>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <PlatformTarget>x86</PlatformTarget>
+    <ConsolePause>false</ConsolePause>
+  </PropertyGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
     <Reference Include="MonoGame.Framework.Windows" Condition=" '$(Configuration)|$(Platform)' == 'Debug Windows|x86' or '$(Configuration)|$(Platform)' == 'Release Windows|x86'">
@@ -91,6 +111,10 @@
     <ProjectReference Include="..\..\Lidgren.Network\Lidgren.Network.csproj">
       <Project>{49BA1C69-6104-41AC-A5D8-B54FA9F696E8}</Project>
       <Name>Lidgren.Network</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\MonoGameMini\MonoGameMini.csproj" Condition=" '$(Configuration)|$(Platform)' == 'Debug MonoGameMini|x86' or '$(Configuration)|$(Platform)' == 'Release MonoGameMini|x86'">
+      <Project>{4CD7AF26-FAD9-4ED4-A3A5-AB96FAE61034}</Project>
+      <Name>MonoGameMini</Name>
     </ProjectReference>
   </ItemGroup>
 </Project>
