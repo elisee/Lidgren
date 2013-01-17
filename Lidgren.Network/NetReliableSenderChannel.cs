@@ -75,21 +75,10 @@ namespace Lidgren.Network
 				float t = m_storedMessages[i].LastSent;
 				if (t > 0 && (now - t) > m_resendDelay)
 				{
-					// deduce sequence number
-					int startSlot = m_windowStart % m_windowSize;
-					int seqNr = m_windowStart;
-					while (startSlot != i)
-					{
-						startSlot--;
-						if (startSlot < 0)
-							startSlot = m_windowSize - 1;
-						seqNr--;
-					}
-
-					//m_connection.m_peer.LogVerbose("Resending due to delay #" + seqNr + " " + om.ToString());
+					//m_connection.m_peer.LogWarning("Resending due to delay #" + m_storedMessages[i].SeqNr + " " + om.ToString());
 					m_connection.m_statistics.MessageResent(MessageResendReason.Delay);
 
-					m_connection.QueueSendMessage(om, seqNr);
+					m_connection.QueueSendMessage(om, m_storedMessages[i].SeqNr);
 
 					m_storedMessages[i].LastSent = now;
 					m_storedMessages[i].NumSent++;
@@ -121,6 +110,7 @@ namespace Lidgren.Network
 			int storeIndex = seqNr % m_windowSize;
 			NetException.Assert(m_storedMessages[storeIndex].Message == null);
 
+			m_storedMessages[storeIndex].SeqNr = seqNr;
 			m_storedMessages[storeIndex].NumSent++;
 			m_storedMessages[storeIndex].Message = message;
 			m_storedMessages[storeIndex].LastSent = now;
