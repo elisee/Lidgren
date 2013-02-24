@@ -44,11 +44,12 @@ namespace Lidgren.Network
 		/// Resolve address callback
 		/// </summary>
 		public delegate void ResolveAddressCallback(IPAddress adr);
+		public delegate void ResolveAddressExceptionCallback(Exception ex);
 
 		/// <summary>
 		/// Get IPv4 endpoint from notation (xxx.xxx.xxx.xxx) or hostname and port number (asynchronous version)
 		/// </summary>
-		public static void ResolveAsync(string ipOrHost, int port, ResolveEndPointCallback callback)
+		public static void ResolveAsync(string ipOrHost, int port, ResolveEndPointCallback callback, ResolveAddressExceptionCallback exceptionCallback=null)
 		{
 			ResolveAsync(ipOrHost, delegate(IPAddress adr)
 			{
@@ -60,7 +61,7 @@ namespace Lidgren.Network
 				{
 					callback(new IPEndPoint(adr, port));
 				}
-			});
+			}, exceptionCallback);
 		}
 
 		/// <summary>
@@ -75,7 +76,7 @@ namespace Lidgren.Network
 		/// <summary>
 		/// Get IPv4 address from notation (xxx.xxx.xxx.xxx) or hostname (asynchronous version)
 		/// </summary>
-		public static void ResolveAsync(string ipOrHost, ResolveAddressCallback callback)
+		public static void ResolveAsync(string ipOrHost, ResolveAddressCallback callback, ResolveAddressExceptionCallback exceptionCallback=null)
 		{
 			if (string.IsNullOrEmpty(ipOrHost))
 				throw new ArgumentException("Supplied string must not be empty", "ipOrHost");
@@ -113,7 +114,15 @@ namespace Lidgren.Network
 						}
 						else
 						{
-							throw;
+							if (exceptionCallback != null)
+							{
+								exceptionCallback(ex);
+								return;
+							}
+							else
+							{
+								throw;
+							}
 						}
 					}
 
@@ -145,7 +154,15 @@ namespace Lidgren.Network
 				}
 				else
 				{
-					throw;
+					if (exceptionCallback != null)
+					{
+						exceptionCallback(ex);
+						return;
+					}
+					else
+					{
+						throw;
+					}
 				}
 			}
 		}
