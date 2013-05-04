@@ -330,6 +330,17 @@ namespace Lidgren.Network
 			return retval;
 		}
 
+		public int GetReliableMessagesAwaitingAckCount(int sequenceChannel)
+		{
+			int channelSlot = (int)NetDeliveryMethod.ReliableOrdered - 1 + sequenceChannel;
+
+			NetReliableSenderChannel chan = m_sendChannels[channelSlot] as NetReliableSenderChannel;
+			if (chan == null)
+				return 0;
+
+			return chan.MessagesAwaitingAck;
+		}
+
 		// may be on user thread
 		private NetSenderChannelBase CreateSenderChannel(NetMessageType tp)
 		{

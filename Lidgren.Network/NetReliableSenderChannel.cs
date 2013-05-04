@@ -8,6 +8,8 @@ namespace Lidgren.Network
 	/// </summary>
 	internal sealed class NetReliableSenderChannel : NetSenderChannelBase
 	{
+		public int MessagesAwaitingAck { get; private set; }
+
 		private NetConnection m_connection;
 		private int m_windowStart;
 		private int m_windowSize;
@@ -47,11 +49,13 @@ namespace Lidgren.Network
 			m_queuedSends.Clear();
 			m_windowStart = 0;
 			m_sendStart = 0;
+			MessagesAwaitingAck = 0;
 		}
 
 		internal override NetSendResult Enqueue(NetOutgoingMessage message)
 		{
 			m_queuedSends.Enqueue(message);
+			MessagesAwaitingAck++;
 
 			int queueLen = m_queuedSends.Count;
 			int left = m_windowSize - ((m_sendStart + NetConstants.NumSequenceNumbers) - m_windowStart) % NetConstants.NumSequenceNumbers;
@@ -132,6 +136,7 @@ namespace Lidgren.Network
 			if (storedMessage.m_recyclingCount <= 0)
 				m_connection.m_peer.Recycle(storedMessage);
 
+			MessagesAwaitingAck--;
 #if !DEBUG
 			}
 #endif
