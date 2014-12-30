@@ -1,7 +1,7 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug Windows</Configuration>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
     <ProductVersion>10.0.0</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
@@ -10,7 +10,7 @@
     <RootNamespace>LidgrenXnaMonoGame</RootNamespace>
     <AssemblyName>LidgrenXnaMonoGame</AssemblyName>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug Windows|x86' ">
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -21,47 +21,7 @@
     <PlatformTarget>x86</PlatformTarget>
     <ConsolePause>false</ConsolePause>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release Windows|x86' ">
-    <DebugType>none</DebugType>
-    <Optimize>true</Optimize>
-    <OutputPath>bin\Release</OutputPath>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-    <PlatformTarget>x86</PlatformTarget>
-    <ConsolePause>false</ConsolePause>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug Linux|x86' ">
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
-    <OutputPath>bin\Debug</OutputPath>
-    <DefineConstants>DEBUG;</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-    <PlatformTarget>x86</PlatformTarget>
-    <ConsolePause>false</ConsolePause>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release Linux|x86' ">
-    <DebugType>none</DebugType>
-    <Optimize>true</Optimize>
-    <OutputPath>bin\Release</OutputPath>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-    <PlatformTarget>x86</PlatformTarget>
-    <ConsolePause>false</ConsolePause>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug OS X|x86' ">
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
-    <OutputPath>bin\Debug</OutputPath>
-    <DefineConstants>DEBUG;</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-    <PlatformTarget>x86</PlatformTarget>
-    <ConsolePause>false</ConsolePause>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release OS X|x86' ">
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
     <DebugType>none</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release</OutputPath>
@@ -92,15 +52,6 @@
   </PropertyGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
-    <Reference Include="MonoGame.Framework" Condition=" '$(Configuration)|$(Platform)' == 'Debug Windows|x86' or '$(Configuration)|$(Platform)' == 'Release Windows|x86'">
-      <HintPath>..\..\..\NuclearWinter\MonoGame\Windows\MonoGame.Framework.dll</HintPath>
-    </Reference>
-    <Reference Include="MonoGame.Framework" Condition=" '$(Configuration)|$(Platform)' == 'Debug Linux|x86' or '$(Configuration)|$(Platform)' == 'Release Linux|x86'">
-      <HintPath>..\..\..\NuclearWinter\MonoGame\Linux\MonoGame.Framework.dll</HintPath>
-    </Reference>
-    <Reference Include="MonoGame.Framework" Condition=" '$(Configuration)|$(Platform)' == 'Debug OS X|x86' or '$(Configuration)|$(Platform)' == 'Release OS X|x86'">
-      <HintPath>..\..\..\NuclearWinter\MonoGame\MacOS\MonoGame.Framework.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
   </ItemGroup>
   <ItemGroup>
@@ -108,6 +59,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\..\NuclearWinter\FNA\FNA.csproj" Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' or '$(Configuration)|$(Platform)' == 'Release|x86'">
+      <Project>{35253CE1-C864-4CD3-8249-4D1319748E8F}</Project>
+      <Name>FNA</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Lidgren.Network\Lidgren.Network.csproj">
       <Project>{49BA1C69-6104-41AC-A5D8-B54FA9F696E8}</Project>
       <Name>Lidgren.Network</Name>
