@@ -7,8 +7,8 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{E4EBE366-F19A-4A93-B5B5-6CA48C0659B9}</ProjectGuid>
     <OutputType>Library</OutputType>
-    <RootNamespace>LidgrenXnaMonoGame</RootNamespace>
-    <AssemblyName>LidgrenXnaMonoGame</AssemblyName>
+    <RootNamespace>Lidgren.Network.Xna</RootNamespace>
+    <AssemblyName>Lidgren.Network.Xna</AssemblyName>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
     <DebugSymbols>true</DebugSymbols>
@@ -67,7 +67,7 @@
       <Project>{49BA1C69-6104-41AC-A5D8-B54FA9F696E8}</Project>
       <Name>Lidgren.Network</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\..\MonoGameMini\MiniFNA.csproj" Condition=" '$(Configuration)|$(Platform)' == 'Debug MiniFNA|x86' or '$(Configuration)|$(Platform)' == 'Release MiniFNA|x86'">
+    <ProjectReference Include="..\..\..\MiniFNA\MiniFNA.csproj" Condition=" '$(Configuration)|$(Platform)' == 'Debug MiniFNA|x86' or '$(Configuration)|$(Platform)' == 'Release MiniFNA|x86'">
       <Project>{4CD7AF26-FAD9-4ED4-A3A5-AB96FAE61034}</Project>
       <Name>MiniFNA</Name>
     </ProjectReference>
