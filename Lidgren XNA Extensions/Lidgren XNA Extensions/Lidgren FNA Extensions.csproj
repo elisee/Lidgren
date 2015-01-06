@@ -30,7 +30,7 @@
     <PlatformTarget>x86</PlatformTarget>
     <ConsolePause>false</ConsolePause>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug MonoGameMini|x86' ">
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug MiniFNA|x86' ">
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -41,7 +41,7 @@
     <PlatformTarget>x86</PlatformTarget>
     <ConsolePause>false</ConsolePause>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release MonoGameMini|x86' ">
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release MiniFNA|x86' ">
     <DebugType>none</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release</OutputPath>
@@ -67,9 +67,9 @@
       <Project>{49BA1C69-6104-41AC-A5D8-B54FA9F696E8}</Project>
       <Name>Lidgren.Network</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\..\MonoGameMini\MonoGameMini.csproj" Condition=" '$(Configuration)|$(Platform)' == 'Debug MonoGameMini|x86' or '$(Configuration)|$(Platform)' == 'Release MonoGameMini|x86'">
+    <ProjectReference Include="..\..\..\MonoGameMini\MiniFNA.csproj" Condition=" '$(Configuration)|$(Platform)' == 'Debug MiniFNA|x86' or '$(Configuration)|$(Platform)' == 'Release MiniFNA|x86'">
       <Project>{4CD7AF26-FAD9-4ED4-A3A5-AB96FAE61034}</Project>
-      <Name>MonoGameMini</Name>
+      <Name>MiniFNA</Name>
     </ProjectReference>
   </ItemGroup>
 </Project>
